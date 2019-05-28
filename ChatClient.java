@@ -5,13 +5,13 @@ public class ChatClient {
 
 	public static void main(String[] args) {
 		if(args.length != 2){
-			System.out.println("Usage : java ChatClient <username> <server-ip>");
+			System.out.println("Usage : java ChatClient <username> <server-ip>"); //username, server-ip 입력하기 
 			System.exit(1);
 		}
 		Socket sock = null; // 서버 생성
-		BufferedReader br = null; // BufferedReader생성
+		BufferedReader br = null; // BufferedReader 생성
 		PrintWriter pw = null; //PrintWriter 생성
-		boolean endflag = false; // endflag boolean변수 선언
+		boolean endflag = false; // endflag boolean 변수 선언
 		try{
 			sock = new Socket(args[1], 10001); // 서버 포트 할당해주기
 			pw = new PrintWriter(new OutputStreamWriter(sock.getOutputStream())); // PrintWriter 스트림연결
