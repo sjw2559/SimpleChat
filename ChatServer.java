@@ -6,21 +6,23 @@ public class ChatServer {
 
 	public static void main(String[] args) {
 		try{
-			ServerSocket server = new ServerSocket(10001);
+			ServerSocket server = new ServerSocket(10001);//클라이언트의 요청을 받기 위한 준비
 			System.out.println("Waiting connection...");
-			HashMap hm = new HashMap();
+			HashMap hm = new HashMap();//Hashmap 객체 hm 생성
 			while(true){
-				Socket sock = server.accept();
-				ChatThread chatthread = new ChatThread(sock, hm);
-				chatthread.start();
+				Socket sock = server.accept();//클라이언트의 요청을 받아 들인다
+				ChatThread chatthread = new ChatThread(sock, hm);//소켓과 hm객체 넘겨
+				// 유저마다 쓰레드를 생성해준다
+				chatthread.start(); // 쓰레드의 시작, run()메소드 실행
 			} // while
 		}catch(Exception e){
 			System.out.println(e);
 		}
 	} // main
+	
 }
 
-class ChatThread extends Thread{
+class ChatThread extends Thread{ //Thread를 상속하는 ChatThread
 	private Socket sock;
 	private String id;
 	private BufferedReader br;
@@ -31,9 +33,11 @@ class ChatThread extends Thread{
 		this.hm = hm;
 		try{
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(sock.getOutputStream()));
+			//소켓 통신을 할 PrintWriter 생성
 			br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-			id = br.readLine();
-			broadcast(id + " entered.");
+			//소켓 통신을 할 BufferedReader 생성
+			id = br.readLine(); 
+			broadcast(id + " entered.");//
 			System.out.println("[Server] User (" + id + ") entered.");
 			synchronized(hm){
 				hm.put(this.id, pw);
