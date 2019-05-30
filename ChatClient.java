@@ -8,7 +8,7 @@ public class ChatClient {
 			System.out.println("Usage : java ChatClient <username> <server-ip>"); //username, server-ip 입력하기 
 			System.exit(1);
 		}
-		Socket sock = null; // 서버 생성
+		Socket sock = null; //  생성
 		BufferedReader br = null; // BufferedReader 생성
 		PrintWriter pw = null; //PrintWriter 생성
 		boolean endflag = false; // endflag boolean 변수 선언
